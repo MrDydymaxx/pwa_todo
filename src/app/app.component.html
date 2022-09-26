@@ -1,0 +1,78 @@
+<!--Division for GeeksForGeeks heading-->
+<div>
+  <div class="header">
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Add task</mat-label>
+        <input
+          [(ngModel)]="newTask"
+          matInput
+          type="text"
+          placeholder="Faire une PWA"
+          name="newTask"
+        />
+      </mat-form-field>
+      <button mat-raised-button (click)="addTask()">Ajouter une tâche</button>
+    </form>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button (click)="filterUndoneTask()">
+      Filter undone
+    </button>
+    <button mat-raised-button (click)="filterDoneTask()">Filter done</button>
+    <button mat-raised-button (click)="filterAllTask()">Filter all</button>
+  </div>
+
+  <div id="undone" class="task-list">
+    <div>To do</div>
+    <div *ngIf="tasks.length > 0" class="cards">
+      <mat-card *ngFor="let x of tasks; let index = index" class="task">
+        <div class="card-first">
+          <mat-checkbox (click)="taskComplete(index)"></mat-checkbox>
+          <div>{{ x }}</div>
+        </div>
+        <div>
+          <button mat-raised-button (click)="modifyTask(index)">Modify</button>
+          <button mat-raised-button (click)="deleteTask(index)" class="delete">
+            Delete
+          </button>
+        </div>
+      </mat-card>
+    </div>
+    <div *ngIf="tasks.length <= 0">You don't have any task!</div>
+  </div>
+
+  <div id="done" class="task-list">
+    <div>Done tasks</div>
+    <div *ngIf="finishedTasks.length > 0" class="cards">
+      <mat-card *ngFor="let x of finishedTasks; let index = index" class="task">
+        <div class="card-first">
+          <mat-checkbox checked (click)="taskUncomplete(index)"></mat-checkbox>
+          <div class="finished">{{ x }}</div>
+        </div>
+        <div>
+          <button
+            mat-raised-button
+            (click)="deleteFinishedTask(index)"
+            class="delete"
+          >
+            Delete
+          </button>
+        </div>
+      </mat-card>
+    </div>
+    <div *ngIf="finishedTasks.length <= 0">
+      You haven't finished any task yet :(
+    </div>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button (click)="deleteDoneTask()">
+      Delete done tasks
+    </button>
+    <button mat-raised-button (click)="deleteAllTask()">
+      Delete all tasks
+    </button>
+  </div>
+</div>
